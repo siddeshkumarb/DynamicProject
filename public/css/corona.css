@@ -1,0 +1,47 @@
+.cases-form {
+    width: 20rem;
+    max-width: 90%;
+    margin: auto;
+}
+
+.cases-item {
+    width: 20rem;
+    max-width: 95%;
+    text-align: center;
+}
+
+.cases__title {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.cases__confirmed {
+    text-align: left;
+    color:navy;
+    margin-bottom: 0.5rem;
+    padding: 0%;
+}
+
+.cases__active {
+    text-align: left;
+    color:orangered;
+    margin-bottom: 0.5rem;
+    padding: 0%;
+}
+
+.cases__recovered {
+    text-align: center;
+    color:seagreen;
+    margin-bottom: 0.5rem;
+    padding: 0%;
+}
+.cases__death {
+    text-align: right;
+    color:crimson;
+    margin-bottom: 0.5rem; 
+    padding: 0%;
+}
+.cases__description {
+    text-align: center;
+
+}

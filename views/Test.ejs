@@ -1,0 +1,75 @@
+<%- include('includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/corona.css">
+</head>
+
+<body>
+    <%- include('includes/navigation.ejs') %>
+
+    
+    <main>
+        <% if (coronaCasesState.length > 0 ) { %>
+
+           
+<br><br>
+
+ <div class="grid">
+     
+    <article class="card product-item">
+        <header class="card__header">
+        <h1 class="cases__title">Corona Cases List </h1>
+        </header> 
+        <table>    
+            <thead> 
+                            <th><h3> State </h3></th>
+                            <th><h3> Confirmed</h3></th>
+                            <th><h3> Active </h3></th>
+                            <th><h3> Recovered  </h3></th>
+                            <th><h3> Deaths </h3></th>
+
+                </thead>
+                
+                <tbody>
+                    
+                    <% for (let i in coronaCasesState) { %>
+                        
+                        <tr>
+                            <td> <span class="card__actions"> <%= coronaCasesState[i].state %></span> 
+                                <td>         <span class="cases__confirmed">   <%= coronaCasesState[i].confirmed %></span>
+                                    <td>    <span class="cases__active">   <%= coronaCasesState[i].active %></span> 
+                                        <td>     <span class="cases__recovered"> <%= coronaCasesState[i].recovered %> </span> 
+                                            <td>    <span class="cases__death"> <%= coronaCasesState[i].deaths %></span> 
+                            </td>
+                        </tr>
+<tr>
+    <td>
+        <details>
+            <summary> <span class="card__actions"> <%= coronaCasesState[i].state %></span> </summary>
+            <p>Hello</p>
+        </details>
+    </td>
+</tr>
+
+                        <% for ( let k in coronaCasesDistrict) {  %>
+                            <% if( coronaCasesState[i].statecode == coronaCasesDistrict[k].statecode) {%>
+                                <% for (let j in coronaCasesDistrict[k].districtData) { %>
+                            <tr>
+                                    <td>   <span class="card__actions"> <%= coronaCasesDistrict[k].districtData[j].district %></span> 
+                                    <td>   <span class="cases__confirmed">   <%= coronaCasesDistrict[k].districtData[j].confirmed %></span> 
+                                    <td>   <span class="cases__active">   <%= coronaCasesDistrict[k].districtData[j].active %></span> 
+                                    <td>   <span class="cases__recovered"> <%= coronaCasesDistrict[k].districtData[j].recovered %> </span> 
+                                    <td>   <span class="cases__death"> <%= coronaCasesDistrict[k].districtData[j].deceased %></span> 
+                            </tr>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                        
+                    <% } %>
+                </tbody>
+            </table>
+        </article>
+            </div>
+        <% } else { %>
+            <h1>No coronaCases Found!</h1>
+        <% } %>
+    </main>
+<%- include('includes/end.ejs') %>

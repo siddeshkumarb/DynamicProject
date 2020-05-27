@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<input type='search' id='search-input' />
+<div id='search-results'></div>
+
+</body>
+</html>
+<script>
+
+var names = ["john", "bob", "kayla", "sam", "elena", "josh", "andrew", "maria"];
+
+function search(){
+  var searchFor = $("#search-input").val();
+  var searchIndex = names.includes(searchFor);//names.indexOf(searchFor);
+  var searchedValue = [];
+
+  var searchedValue = names.filter(function(item){
+        return eval('/'+searchFor.toUpperCase()+'/').test(item.toUpperCase());
+    });
+
+  if(searchIndex == -1)
+    $("#search-results").html("no results");
+  else
+    $("#search-results").html(searchedValue);
+}
+$("#search-input").on("keyup", search);
+
+</script>

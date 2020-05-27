@@ -1,0 +1,186 @@
+
+body {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: 'archia';
+  font-size: 24px !important;
+  font-weight: 900;
+}
+
+h2 {
+  font-family: 'archia';
+  font-size: 18px !important;
+  font-weight: 400;
+}
+
+h3 {
+  font-family: 'archia';
+  font-size: 14px !important;
+  font-weight: 400;
+}
+
+h4 {
+  font-family: 'archia';
+  font-size: 13px !important;
+  font-weight: 900;
+}
+
+h5 {
+  font-family: 'archia';
+  font-size: 12px !important;
+  font-weight: 900;
+}
+
+h6 {
+  font-family: 'archia';
+  font-size: 11px !important;
+  font-weight: 600;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+.Navbar {
+  display: flex;
+  flex-direction: row;
+  height: 3.9rem;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+}
+ 
+.button {
+      border: 0;
+      color: #6c757d;
+      cursor: pointer;
+      font-family: 'archia';
+      font-size: 12px;
+      font-weight: 600;
+      margin: 0;
+      padding: 1.5rem;
+      transition: all 0s ease-in-out;
+      width: 3rem;
+    }
+  
+  .navbar-left {
+    color: gray;
+    cursor: pointer;
+    font-family: 'archia';
+    font-size: 12px;
+    font-weight: 600;
+    padding: 1.5rem;
+  }
+
+  .navbar-middle {
+    color: gray;
+    font-family: 'archia';
+    font-size: 18px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .navbar-right {
+    color: gray;
+    cursor: pointer;
+    font-family: 'archia';
+    font-size: 12px;
+    font-weight: 600;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0s ease-in-out;
+    width: 3rem;
+  }
+  .hover {
+    background: blue;
+    color: #fff;
+  }
+  .expand {
+    background: gray;
+    color: gray;
+    display: flex;
+    flex-direction: column;
+    font-family: 'archia';
+    height: 100vh;
+    position: absolute;
+    top: 3.85rem;
+    transform: none;
+    width: 100vw;
+    z-index: 9999;
+  }
+  
+.Table {
+  margin-bottom: 1rem;
+}
+
+table {
+  align-self: center;
+  border-collapse: separate;
+  border-spacing: 3px 4px;
+  font-family: 'archia';
+  position: relative;
+  width: 30rem;
+}
+  thead {
+    background: #c7c5c5;
+    color:maroon;
+    font-size: .75rem;
+    text-align: left;
+  }
+    th {
+      background:#c7c5c5;
+      border-radius: 5px;
+      cursor: pointer;
+      padding: .5rem;
+      position: sticky !important;
+      top: 5px;
+      transition: all .1s ease-in-out;
+      z-index: 99;
+
+    }
+tr {
+      background:hsl(0, 15%, 87%);
+      border-radius: 5px;
+
+      padding: .5rem;
+      position: sticky !important;
+      top: 5px;
+      transition: all .1s ease-in-out;
+      z-index: 99;
+
+}
+td {
+  background: #c7c5c5;
+  border-radius: 5px;
+
+  padding: .5rem;
+  position: sticky !important;
+  top: 5px;
+  transition: all .1s ease-in-out;
+  z-index: 99;
+}
+
+li-display {
+  background: #c7c5c5;
+  border-radius: 5px;
+
+  padding: .5rem;
+  position: sticky !important;
+  top: 5px;
+  transition: all .1s ease-in-out;
+  z-index: 99;
+
+}
+
+details {
+  background:hsl(0, 0%, 97%);
+  
+      padding: .3rem;
+}

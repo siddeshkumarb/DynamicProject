@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head> <style type="text/css">
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+
+
+body {
+  padding: 2;
+  margin: 2;
+  font-family: 'Calibri Light', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+.card {
+  box-shadow: 0 2px 8px darkblue;
+}
+
+.card__header,
+.card__content {
+  padding: 1rem;
+
+}
+
+.form label,
+.form input {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.25rem;
+}
+	
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+  padding-top: 1rem;
+  padding-bottom: 2re;
+}
+
+.product-item {
+	width: 40rem;
+	max-width: 90%;
+	padding-top: 1rem;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  max-height: 450px;
+}
+
+.span {
+	font-weight: bold;
+  text-align: center; 
+  text-size-adjust: 10px;
+  padding-left: 0; 
+}
+
+.droptarget {
+  float: left; 
+  width: 250px; 
+  height: 200px;
+  margin: 15px;
+  padding: 10px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  border: 1px solid #aaaaaa;
+}
+
+</style></head>
+<!--<body onLoad="loadXMLDoc()">-->
+<body>
+<form action="#">
+  	
+<div class="grid">
+        <article class="card product-item">
+			
+<details open="open">
+  <summary><b> ZPPSReagentCompliance</b></summary>
+  
+  <ul>
+    <details open="open">
+    <summary><strong>DIMENSIONS</strong></summary><ul>
+      <div id ="DimHtml"> </div>
+    </ul>
+    </details>
+	
+    <details open="open"><summary>MEASURES</summary>
+      <ul>
+        <div id ="MHtml"> </div>
+      </ul>
+    </details>
+	
+  <details open="open"><summary>TIME_DIMENSIONS</summary>
+    <ul>
+      <div id ="FHtml"> </div>
+    </ul>
+  </ul>
+	</details> 
+
+</article>
+
+<article id ="displayContentId" class="card product-item">
+<b> Drag and Drop here</b><br>
+
+    <div id='Dimension' class="droptarget" ondrop="dropDim(event)" ondragover="allowDrop(event)" >
+      <strong>  <u> Dimension</u></strong>
+        <p id='labelDimensionText'></p>
+    </div>
+
+    <div id='Measures' class="droptarget" ondrop="dropMes(event)" ondragover="allowDrop(event)">
+        <strong> <u>Measures</u></strong>
+        <p id='labelMeasuresext'></p>
+    </div>
+
+    <div id='Filters' class="droptarget" ondrop="dropFil(event)" ondragover="allowDrop(event)">
+        <strong><u>Filters</u></strong>
+        <p id='labelFiltersText'></p>
+    </div>
+
+</article>
+<br><br>
+<article class="card"><br>
+    <input type="button" id="btn" value="Download XML" /> <br>
+</article>
+</div>
+ 
+</form>
+
+</body>
+</html>
+
+<script>
+    var dimension = [];
+    var measures = [];
+    var filters = [];
+
+    function dragStart(event) {
+      event.dataTransfer.setData("Text", event.target.id);
+    }
+    function allowDrop(event) {
+      event.preventDefault();
+    }
+    
+    // function drop(event) {
+    //   event.preventDefault();
+    //   var data = event.dataTransfer.getData("Text");
+    //   var divData = event.target.appendChild(document.getElementById(data).cloneNode(true));
+    //   //Dimension.push( event.target.appendChild(document.getElementById(data).cloneNode(true)));
+    // }
+
+    //Dimensions
+    function dropDim(event) {
+      event.preventDefault();
+      var data = event.dataTransfer.getData("Text");
+     
+      if( (dataMeaInput.includes(data)) || (dataTimInput.includes(data)))
+        alert('Cant move Other elements to Dimensions!');
+      else
+        dimension.push(data);
+        dimension = getUnique(dimension);
+
+        document.getElementById("labelDimensionText").innerHTML = "<table>"+ corssMarkAppend(dimension).join(" ") +"</table>";
+    }
+
+    function corssMarkAppend(array){
+        var crossMarkApp = [];
+       var buttonAddstart = "<tr><td><input type='button' title='Remove this item from the list.' onclick='deleteRowFunction(this, "+array+");'  value=X id=";
+        var buttonAddend = "</input></td></tr>";
+        // Loop through array values
+        for(var value of array){
+            if(crossMarkApp.indexOf(value) === -1){
+                crossMarkApp.push(buttonAddstart+value+"> "+value+buttonAddend);
+            }
+        }
+        return crossMarkApp;
+    }
+
+    function deleteRowFunction(obj, array) {
+      var td = event.target.parentNode; 
+      var tr = td.parentNode; // the row to be removed
+      tr.parentNode.removeChild(tr);
+      dimension = dimension.filter(e => e !== obj.id);
+    }
+
+    //Measures
+    function dropMes(event) {
+      event.preventDefault();
+      var data = event.dataTransfer.getData("Text");
+      if( (dataDimInput.includes(data)) || (dataTimInput.includes(data)))
+        alert('Cant move Other elements to Measures!');
+      else
+        measures.push(data);
+      measures = getUnique(measures);
+      document.getElementById("labelMeasuresext").innerHTML = "<table>"+ corssMarkAppendM(measures).join(" ") +"</table>";
+    }
+
+    function corssMarkAppendM(array){
+        var crossMarkApp = [];
+        var buttonAddstart = "<tr><td><input type='button' title='Remove this item from the list.' onclick='deleteRowFunctionM(this, "+array+");'  value=X id=";
+        var buttonAddend = "</input></td></tr>";
+        // Loop through array values
+        for(var value of array){
+            if(crossMarkApp.indexOf(value) === -1){
+                crossMarkApp.push(buttonAddstart+value+"> "+value+buttonAddend);
+            }
+        }
+        return crossMarkApp;
+    }
+
+    function deleteRowFunctionM(obj, array) {
+      var td = event.target.parentNode; 
+      var tr = td.parentNode; // the row to be removed
+      tr.parentNode.removeChild(tr);
+      measures = measures.filter(e => e !== obj.id);
+    }
+
+
+    //filters
+    function dropFil(event) {
+      event.preventDefault();
+      var data = event.dataTransfer.getData("Text");
+      
+      filters.push(data);
+      filters = getUnique(filters);
+      document.getElementById("labelFiltersText").innerHTML = "<table>"+ corssMarkAppendF(filters).join(" ") +"</table>";
+    }
+
+    
+    function corssMarkAppendF(array){
+        var crossMarkApp = [];
+        var buttonAddstart = "<tr><td><input type='button' title='Remove this item from the list.' onclick='deleteRowFunctionF(this, "+array+");'  value=X id=";
+        var buttonAddend = "</input></td></tr>";
+        // Loop through array values
+        for(var value of array){
+            if(crossMarkApp.indexOf(value) === -1){
+                crossMarkApp.push(buttonAddstart+value+"> "+value+buttonAddend);
+            }
+        }
+        return crossMarkApp;
+    }
+
+    function deleteRowFunctionF(obj, array) {
+      // event.target will be the input element.
+      var td = event.target.parentNode; 
+      var tr = td.parentNode; // the row to be removed
+      tr.parentNode.removeChild(tr);
+      filters = filters.filter(e => e !== obj.id);
+    }
+
+    function getUnique(array){
+        var uniqueArray = [];
+        // Loop through array values
+        for(var value of array){
+            if(uniqueArray.indexOf(value) === -1){
+                uniqueArray.push(value);
+            }
+        }
+        return uniqueArray;
+    }
+    var xml = "";
+    function printXml() {
+            xml = '<?xml version="1.0" encoding="UTF-8"?><Root><Classes>\n';
+            xml += "<Class Dimensions='" + dimension + "'>\n";
+            xml += "</Class>\n";
+			xml += "<Class Measures='" + measures + "'>\n";
+            xml += "</Class>\n";
+			xml += "<Class Filters='" + filters + "'>\n";
+            xml += "</Class>\n";
+            xml += '</Classes></Root>';
+            window.alert(xml);
+    }
+
+function download(file, text) { 
+  var element = document.createElement('a'); 
+  element.setAttribute('href', 'data:text/plain;charset=utf-8, ' 
+                       + encodeURIComponent(text)); 
+  element.setAttribute('download', file); 
+  document.body.appendChild(element); 
+  element.click(); 
+  document.body.removeChild(element); 
+} 
+
+// Start file download. 
+document.getElementById("btn").addEventListener("click", function() { 
+    var filename = "myFile.xml"; 
+    printXml();
+    download(filename, xml); 
+}, false); 
+
+
+</script>
+
+
+<script>
+  //Load data from XML to HTML
+  var parser, xmlDoc;
+  var dataDimInput = [];
+  var dataMeaInput = [];
+  var dataTimInput = [];
+  var text = "<AllDetails><Class>" +
+  "<DIMENSIONS>Area,AreaDesc,AreaManagerName,AreaManagerNameTest </DIMENSIONS>" +
+  "<MEASURES>BIllingNetPlanRateUSD, BillingNetTranCurr,BillingNetTranCurrs, BillingNetTranCurrTest</MEASURES>" +
+  "<TIME_DIMENSIONS>BillingDate,CYContractEndDate,CYContractStartDate,ContractChangeDate, CYContractEndOtherDate, CYContractEndOtherDate1,CYContractEndOtherDate2,CYContractEndOtherDate3,CYContractEndOtherDate4,CYContractEndOtherDate5,CYContractEndOtherDate6 </TIME_DIMENSIONS>" +
+  "</Class></AllDetails>";
+  
+  parser = new DOMParser();
+  xmlDoc = parser.parseFromString(text,"text/xml");
+  
+  dataTemp = "";
+  dataDimInput = (xmlDoc.getElementsByTagName("DIMENSIONS")[0].childNodes[0].nodeValue).split(',');
+     for (i = 0; i < dataDimInput.length; i++) {
+        dataTemp += "<li ondragstart='dragStart(event)' draggable='true' id='"+ dataDimInput[i]+ "'>"+dataDimInput[i];
+      }
+  document.getElementById("DimHtml").innerHTML = dataTemp;
+  
+  dataTemp = "";
+  dataMeaInput = (xmlDoc.getElementsByTagName("MEASURES")[0].childNodes[0].nodeValue).split(',');
+     for (i = 0; i < dataMeaInput.length; i++) {
+        dataTemp += "<li ondragstart='dragStart(event)' draggable='true' id='"+ dataMeaInput[i]+ "'>"+dataMeaInput[i];
+      }
+  document.getElementById("MHtml").innerHTML = dataTemp;
+
+  dataTemp = "";
+  dataTimInput = (xmlDoc.getElementsByTagName("TIME_DIMENSIONS")[0].childNodes[0].nodeValue).split(',');
+     for (i = 0; i < dataTimInput.length; i++) {
+        dataTemp += "<li ondragstart='dragStart(event)' draggable='true' id='"+ dataTimInput[i]+ "'>"+dataTimInput[i];
+      }
+  document.getElementById("FHtml").innerHTML = dataTemp;
+
+  </script>
+

@@ -1,0 +1,65 @@
+<%- include('includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/corona.css">
+</head>
+
+<body>
+    <%- include('includes/navigation.ejs') %>
+
+    <main>
+        <% if (coronaCases.length > 0 ) { %>
+<div class="grid">
+            <!-- <article class="card cases-item">
+                <header class="card__header">
+                    <h1 class="cases__title">India's Corona Cases Details</h1>
+                </header>
+                <div class="card__content">
+                    <p> Confirmed : <span class="cases__confirmed">   <%= coronaCases[0].confirmed %> </span>
+                        <p>   Active : <span class="cases__active">   <%= coronaCases[0].active %> </span>
+                            <p>  Recovered :<span class="cases__recovered">  <%= coronaCases[0].recovered %></span>
+                                <p>  Deaths:<span class="cases__death">  <%= coronaCases[0].deaths %> </span></p>
+                </div>
+                <div class="card__actions">
+                    <button class="btn"> <%= coronaCases[0].state %></button>
+                </div>
+            </article> -->
+         
+                <article class="card product-item">
+            <table>                
+                <thead>
+                    <tr>                        
+                            <header class="card__header">
+                                <h1 class="cases__title">India Corona Cases List </h1>
+                            </header>
+                            <td><h2 > State </h2></td>
+                            <td><h2> Confirmed</h2></td>
+                            <td><h2 > Active </h2></td>
+                            <td><h2  > Recovered  </h2></td>
+                            <td><h2  > Deaths </h2></td>
+                            
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <% for (let i in coronaCases) { %>
+                        <tr>  
+                            <td>  <span class="card__actions"> <%= coronaCases[i].state %></span> </td>
+                            <td> <span class="cases__confirmed">   <%= coronaCases[i].confirmed %></span> </td>
+                                <td> <span class="cases__active">   <%= coronaCases[i].active %></span> </td>
+                                    <td><span class="cases__recovered"> <%= coronaCases[i].recovered %> </span> </td>
+                                        <td> <span class="cases__death"> <%= coronaCases[i].deaths %></span> </td>
+                       
+                        <!-- <div class="card__actions">State:
+                            <button class="btn"> <%= coronaCases[i].state %></button>
+                        </div> -->
+                        </tr>
+                    <% } %>
+                </tbody>
+            
+            </table>
+        </article>
+            </div>
+        <% } else { %>
+            <h1>No coronaCases Found!</h1>
+        <% } %>
+    </main>
+<%- include('includes/end.ejs') %>
